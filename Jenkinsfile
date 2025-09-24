@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven'  // must match the name in Global Tool Configuration
+    }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // Jenkins stored credentials
         DOCKER_IMAGE = "shreyankgopal403/calculator"
