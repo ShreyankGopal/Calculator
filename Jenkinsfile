@@ -50,6 +50,14 @@ pipeline {
                 sh "/usr/local/bin/docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}"
             }
         }
+        stage('Deploy with Ansible') {
+            steps {
+                sh """
+                    ansible-playbook -i inventory.ini deploy.yml \
+                      --extra-vars "build_number=${BUILD_NUMBER}"
+                """
+            }
+        }
     }
 
     post {

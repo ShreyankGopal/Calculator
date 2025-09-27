@@ -1,0 +1,16 @@
+- hosts: local
+  tasks:
+    - name: Pull calculator image from Docker Hub
+      community.docker.docker_image:
+        name: shreyankgopal403/calculator
+        tag: "{{ build_number }}"   # dynamically injected
+        source: pull
+
+    - name: Run calculator container
+      community.docker.docker_container:
+        name: calculator
+        image: "shreyankgopal403/calculator:{{ build_number }}"
+        state: started
+        tty: yes
+        interactive: yes
+        restart_policy: always
