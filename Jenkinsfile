@@ -7,7 +7,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // Jenkins stored credentials
         DOCKER_IMAGE = "shreyankgopal403/calculator"
     }
-
+    // this is a changed file
     stages {
         stage('Checkout') {
             steps {
