@@ -34,22 +34,30 @@ pipeline {
             }
         }
 
-        
-        stage('Build Docker Image') {
+        stage('Build Multi-Arch Docker Image') {
             steps {
                 sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | /usr/local/bin/docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                sh "/usr/local/bin/docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ."
+                sh """
+                    /usr/local/bin/docker buildx build --platform linux/amd64,linux/arm64 \
+                      -t ${DOCKER_IMAGE}:${BUILD_NUMBER} \
+                      -t ${DOCKER_IMAGE}:latest \
+                      --load .
+                """
             }
         }
 
-        
-
-        stage('Push Docker Image') {
+        stage('Push Multi-Arch Docker Image') {
             steps {
                 sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | /usr/local/bin/docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                sh "/usr/local/bin/docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                sh """
+                    /usr/local/bin/docker buildx build --platform linux/amd64,linux/arm64 \
+                      -t ${DOCKER_IMAGE}:${BUILD_NUMBER} \
+                      -t ${DOCKER_IMAGE}:latest \
+                      --push .
+                """
             }
         }
+
         stage('Deploy with Ansible') {
             steps {
                 sh """
