@@ -21,7 +21,7 @@ public class Calculator {
         }
         return result;
     }
-
+    //Natural log
     // Natural logarithm function
     public double naturalLog(double x) {
         if (x <= 0) {
