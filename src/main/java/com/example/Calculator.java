@@ -21,6 +21,7 @@ public class Calculator {
         }
         return result;
     }
+    //hello
     //Natural log
     // Natural logarithm function
     public double naturalLog(double x) {

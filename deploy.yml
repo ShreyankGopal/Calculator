@@ -3,13 +3,13 @@
     - name: Pull calculator image from Docker Hub
       community.docker.docker_image:
         name: shreyankgopal403/calculator
-        tag: "{{ build_number }}"   # dynamically injected
+        tag: latest      # use latest tag
         source: pull
 
     - name: Run calculator container
       community.docker.docker_container:
         name: calculator
-        image: "shreyankgopal403/calculator:{{ build_number }}"
+        image: "shreyankgopal403/calculator:latest"  # use latest tag
         state: started
         tty: yes
         interactive: yes
