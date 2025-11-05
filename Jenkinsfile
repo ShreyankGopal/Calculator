@@ -77,3 +77,6 @@ pipeline {
         }
     }
 }
+// finally run this as docker run -t image name because u need to attach an interactvee terminal at if u need to take terminal user inputs 
+// docker pull shreyankgopal403/calculator:latest
+// docker run -it shreyankgopal403/calculator:latest
