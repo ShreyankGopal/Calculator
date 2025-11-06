@@ -40,7 +40,7 @@ public class Calculator {
         try (java.util.Scanner sc = new java.util.Scanner(System.in)) {
             Calculator calc = new Calculator();
             int choice;
-            
+            //
             do {
                 System.out.println("\n=== Scientific Calculator ===");
                 System.out.println("1. Square Root (√x)");
